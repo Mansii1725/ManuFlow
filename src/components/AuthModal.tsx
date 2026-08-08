@@ -142,36 +142,36 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden text-slate-100 animate-in fade-in zoom-in duration-150">
+    <div className="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="bg-[#fbf9f5] border border-[#d6d0c0] rounded-2xl max-w-xl w-full shadow-xl overflow-hidden text-stone-800 animate-in fade-in zoom-in duration-150">
         
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/60">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#e2ddd0] bg-[#f0ebe0]">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-indigo-500/20 text-indigo-400 rounded-lg">
+            <div className="p-2 bg-[#e1efe6] text-emerald-800 border border-[#bcdcc7] rounded-lg">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Identity & Security Authentication</h2>
-              <p className="text-xs text-slate-400">OTP Login, 2FA Verification & Strong Password Engine</p>
+              <h2 className="text-base font-bold text-stone-800">Identity & Security Authentication</h2>
+              <p className="text-xs text-stone-600">OTP Login, 2FA Verification & Strong Password Engine</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition"
+            className="p-1.5 text-stone-500 hover:text-stone-800 bg-[#eae5d8] hover:bg-[#ded8c8] rounded-lg transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Tab Selection Navigation */}
-        <div className="flex border-b border-slate-800 bg-slate-950/50 text-xs">
+        <div className="flex border-b border-[#e2ddd0] bg-[#f0ebe0]/60 text-xs">
           <button
             onClick={() => setActiveTab('OTP')}
-            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 cursor-pointer ${
               activeTab === 'OTP'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'border-[#3b7a57] text-emerald-900 bg-[#e1efe6]/80 font-bold'
+                : 'border-transparent text-stone-600 hover:text-stone-900'
             }`}
           >
             <Mail className="w-3.5 h-3.5" />
@@ -180,10 +180,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
 
           <button
             onClick={() => setActiveTab('TWO_FACTOR')}
-            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 cursor-pointer ${
               activeTab === 'TWO_FACTOR'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'border-[#3b7a57] text-emerald-900 bg-[#e1efe6]/80 font-bold'
+                : 'border-transparent text-stone-600 hover:text-stone-900'
             }`}
           >
             <Shield className="w-3.5 h-3.5" />
@@ -192,10 +192,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
 
           <button
             onClick={() => setActiveTab('PASSWORD_GEN')}
-            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 cursor-pointer ${
               activeTab === 'PASSWORD_GEN'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'border-[#3b7a57] text-emerald-900 bg-[#e1efe6]/80 font-bold'
+                : 'border-transparent text-stone-600 hover:text-stone-900'
             }`}
           >
             <Key className="w-3.5 h-3.5" />
@@ -204,10 +204,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
 
           <button
             onClick={() => setActiveTab('RECOVERY')}
-            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-3 font-medium border-b-2 text-center transition flex items-center justify-center gap-1.5 cursor-pointer ${
               activeTab === 'RECOVERY'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'border-[#3b7a57] text-emerald-900 bg-[#e1efe6]/80 font-bold'
+                : 'border-transparent text-stone-600 hover:text-stone-900'
             }`}
           >
             <Lock className="w-3.5 h-3.5" />
@@ -221,27 +221,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
           {/* TAB 1: EMAIL OTP VERIFICATION */}
           {activeTab === 'OTP' && (
             <div className="space-y-4">
-              <div className="p-3 bg-indigo-950/40 border border-indigo-800/40 rounded-xl text-xs text-indigo-200">
-                <p className="font-semibold text-indigo-300 mb-1">State-Driven Email OTP Auth Process</p>
+              <div className="p-3 bg-[#e1efe6]/80 border border-[#bcdcc7] rounded-xl text-xs text-stone-800">
+                <p className="font-semibold text-emerald-900 mb-1">State-Driven Email OTP Auth Process</p>
                 <p>
                   Enter your registered factory email address to receive a secure 6-digit One-Time Password (OTP) with 5-minute expiry.
                 </p>
               </div>
 
               {otpError && (
-                <div className="p-3 bg-rose-950/50 border border-rose-800 text-rose-200 text-xs rounded-xl flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+                <div className="p-3 bg-rose-100 border border-rose-300 text-rose-800 text-xs rounded-xl flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-700" />
                   <span>{otpError}</span>
                 </div>
               )}
 
               {otpSuccessMessage && (
-                <div className="p-3 bg-emerald-950/50 border border-emerald-800 text-emerald-200 text-xs rounded-xl">
-                  <p className="font-medium text-emerald-300">{otpSuccessMessage}</p>
+                <div className="p-3 bg-[#e1efe6] border border-[#bcdcc7] text-emerald-900 text-xs rounded-xl">
+                  <p className="font-medium text-emerald-900">{otpSuccessMessage}</p>
                   {otpSentPreview && (
-                    <div className="mt-2 p-2 bg-slate-900 border border-emerald-700/50 rounded-lg flex items-center justify-between font-mono">
-                      <span className="text-slate-400 text-[11px]">Demo OTP Token:</span>
-                      <strong className="text-emerald-400 text-base tracking-widest">{otpSentPreview}</strong>
+                    <div className="mt-2 p-2 bg-[#fbf9f5] border border-[#bcdcc7] rounded-lg flex items-center justify-between font-mono">
+                      <span className="text-stone-600 text-[11px]">Demo OTP Token:</span>
+                      <strong className="text-emerald-800 text-base tracking-widest">{otpSentPreview}</strong>
                     </div>
                   )}
                 </div>
@@ -249,7 +249,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
 
               <form onSubmit={handleSendOtp} className="space-y-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Corporate Email Address</label>
+                  <label className="block text-xs font-semibold text-stone-700 mb-1">Corporate Email Address</label>
                   <div className="flex gap-2">
                     <input
                       type="email"
@@ -257,12 +257,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                       onChange={(e) => setEmailInput(e.target.value)}
                       required
                       placeholder="user@factory-mrp.com"
-                      className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                      className="input-style flex-1"
                     />
                     <button
                       type="submit"
                       disabled={isOtpLoading}
-                      className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-medium transition disabled:opacity-50"
+                      className="px-4 py-2 bg-[#3b7a57] hover:bg-[#2d6144] text-white rounded-xl text-xs font-medium transition cursor-pointer disabled:opacity-50"
                     >
                       {isOtpLoading ? 'Sending...' : 'Send OTP'}
                     </button>
@@ -270,23 +270,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                 </div>
               </form>
 
-              <div className="pt-3 border-t border-slate-800">
+              <div className="pt-3 border-t border-[#e2ddd0]">
                 <form onSubmit={handleVerifyOtp} className="space-y-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Enter 6-Digit OTP Verification Code</label>
+                    <label className="block text-xs font-semibold text-stone-700 mb-1">Enter 6-Digit OTP Verification Code</label>
                     <input
                       type="text"
                       maxLength={6}
                       value={otpCodeInput}
                       onChange={(e) => setOtpCodeInput(e.target.value)}
                       placeholder="e.g. 123456"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 text-center text-lg font-mono tracking-widest text-white focus:outline-none focus:border-indigo-500"
+                      className="w-full bg-[#fbf9f5] border border-[#dcd6c8] rounded-xl px-3 py-2.5 text-center text-lg font-mono tracking-widest text-stone-800 focus:outline-none focus:border-[#3b7a57]"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={!otpCodeInput || isOtpLoading}
-                    className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg text-xs shadow transition flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-2.5 bg-[#3b7a57] hover:bg-[#2d6144] text-white font-medium rounded-xl text-xs shadow-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     <span>Verify OTP & Proceed to 2FA</span>
                     <ArrowRight className="w-4 h-4" />
@@ -299,46 +299,46 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
           {/* TAB 2: TWO-FACTOR AUTHENTICATION (2FA) */}
           {activeTab === 'TWO_FACTOR' && (
             <div className="space-y-4">
-              <div className="p-3 bg-indigo-950/40 border border-indigo-800/40 rounded-xl text-xs text-indigo-200 flex items-start gap-2.5">
-                <Shield className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
+              <div className="p-3 bg-[#e1efe6]/80 border border-[#bcdcc7] rounded-xl text-xs text-stone-800 flex items-start gap-2.5">
+                <Shield className="w-5 h-5 text-emerald-800 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-indigo-300">Mandatory 2FA Security Challenge</p>
-                  <p className="mt-0.5">Enter the 6-digit TOTP code from your Google Authenticator or YubiKey hardware token.</p>
+                  <p className="font-semibold text-emerald-900">Mandatory 2FA Security Challenge</p>
+                  <p className="mt-0.5 text-stone-700">Enter the 6-digit TOTP code from your Google Authenticator or YubiKey hardware token.</p>
                 </div>
               </div>
 
               {totpError && (
-                <div className="p-3 bg-rose-950/50 border border-rose-800 text-rose-200 text-xs rounded-xl flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+                <div className="p-3 bg-rose-100 border border-rose-300 text-rose-800 text-xs rounded-xl flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-700" />
                   <span>{totpError}</span>
                 </div>
               )}
 
               {totpSuccess && (
-                <div className="p-3 bg-emerald-950/50 border border-emerald-800 text-emerald-200 text-xs rounded-xl flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-400" />
+                <div className="p-3 bg-[#e1efe6] border border-[#bcdcc7] text-emerald-900 text-xs rounded-xl flex items-center gap-2">
+                  <Check className="w-4 h-4 text-emerald-800" />
                   <span>Two-Factor Authentication Verified! Launching ERP Session...</span>
                 </div>
               )}
 
               <form onSubmit={handleVerify2FA} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">TOTP Authenticator Code</label>
+                  <label className="block text-xs font-semibold text-stone-700 mb-1">TOTP Authenticator Code</label>
                   <input
                     type="text"
                     maxLength={6}
                     value={totpInput}
                     onChange={(e) => setTotpInput(e.target.value)}
                     placeholder="e.g. 884920"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-center text-xl font-mono tracking-widest text-emerald-400 focus:outline-none focus:border-indigo-500"
+                    className="w-full bg-[#fbf9f5] border border-[#dcd6c8] rounded-xl px-3 py-3 text-center text-xl font-mono tracking-widest text-emerald-900 focus:outline-none focus:border-[#3b7a57]"
                   />
-                  <p className="text-[11px] text-slate-400 mt-1">Tip for demo: Enter any 6-digit number (e.g. 884920)</p>
+                  <p className="text-[11px] text-stone-500 mt-1">Tip for demo: Enter any 6-digit number (e.g. 884920)</p>
                 </div>
 
                 <button
                   type="submit"
                   disabled={totpInput.length !== 6}
-                  className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg text-xs shadow transition disabled:opacity-50"
+                  className="w-full py-2.5 bg-[#3b7a57] hover:bg-[#2d6144] text-white font-semibold rounded-xl text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
                 >
                   Confirm 2FA Verification
                 </button>
@@ -349,23 +349,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
           {/* TAB 3: STRONG PASSWORD GENERATOR */}
           {activeTab === 'PASSWORD_GEN' && (
             <div className="space-y-4">
-              <div className="p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2">
+              <div className="p-3 bg-[#fbf9f5] border border-[#dcd6c8] rounded-xl space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-300">Cryptographically Strong Password:</span>
+                  <span className="text-xs font-semibold text-stone-700">Cryptographically Strong Password:</span>
                   <button
                     onClick={handleRegeneratePassword}
-                    className="p-1 text-slate-400 hover:text-indigo-400 transition"
+                    className="p-1 text-stone-500 hover:text-emerald-800 transition cursor-pointer"
                     title="Generate New Password"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                <div className="flex items-center gap-2 p-2.5 bg-slate-900 border border-slate-800 rounded-lg font-mono text-sm text-amber-300 break-all select-all">
-                  <span className="flex-1">{generatedPassword}</span>
+                <div className="flex items-center gap-2 p-2.5 bg-[#f0ebe0] border border-[#dcd6c8] rounded-lg font-mono text-sm text-stone-900 break-all select-all">
+                  <span className="flex-1 font-bold">{generatedPassword}</span>
                   <button
                     onClick={handleCopyPassword}
-                    className="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-xs font-sans transition flex items-center gap-1 shrink-0"
+                    className="px-2.5 py-1 bg-[#3b7a57] hover:bg-[#2d6144] text-white rounded text-xs font-sans transition flex items-center gap-1 shrink-0 cursor-pointer"
                   >
                     {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -374,24 +374,24 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
 
                 {/* Entropy Meter */}
                 <div className="space-y-1 pt-1">
-                  <div className="flex justify-between text-[11px] font-medium text-slate-400">
+                  <div className="flex justify-between text-[11px] font-medium text-stone-600">
                     <span>Entropy Score: {entropy.score}% ({entropy.bits} bits)</span>
                     <span
                       className={`font-bold ${
                         entropy.label === 'EXCELLENT'
-                          ? 'text-emerald-400'
+                          ? 'text-emerald-800'
                           : entropy.label === 'STRONG'
-                          ? 'text-indigo-400'
-                          : 'text-amber-400'
+                          ? 'text-emerald-700'
+                          : 'text-amber-800'
                       }`}
                     >
                       {entropy.label}
                     </span>
                   </div>
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-[#e8e3d5] rounded-full overflow-hidden border border-[#d2cbba]">
                     <div
                       className={`h-full transition-all duration-300 ${
-                        entropy.score > 75 ? 'bg-emerald-500' : entropy.score > 50 ? 'bg-indigo-500' : 'bg-amber-500'
+                        entropy.score > 75 ? 'bg-[#3b7a57]' : entropy.score > 50 ? 'bg-emerald-600' : 'bg-amber-600'
                       }`}
                       style={{ width: `${entropy.score}%` }}
                     />
@@ -400,13 +400,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
               </div>
 
               {/* Password Policy Customizer */}
-              <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl space-y-3">
-                <h4 className="text-xs font-semibold text-slate-300">Security Policy Parameters</h4>
+              <div className="p-3 bg-[#fbf9f5] border border-[#dcd6c8] rounded-xl space-y-3">
+                <h4 className="text-xs font-semibold text-stone-700">Security Policy Parameters</h4>
 
                 <div>
-                  <div className="flex justify-between text-xs text-slate-400 mb-1">
+                  <div className="flex justify-between text-xs text-stone-600 mb-1">
                     <span>Password Length:</span>
-                    <strong className="text-white">{passLength} characters</strong>
+                    <strong className="text-stone-800">{passLength} characters</strong>
                   </div>
                   <input
                     type="range"
@@ -417,12 +417,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                       setPassLength(Number(e.target.value));
                       handleRegeneratePassword();
                     }}
-                    className="w-full accent-indigo-500"
+                    className="w-full accent-[#3b7a57]"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <label className="flex items-center gap-2 text-slate-300 cursor-pointer">
+                  <label className="flex items-center gap-2 text-stone-700 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={incUpper}
@@ -430,12 +430,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                         setIncUpper(e.target.checked);
                         handleRegeneratePassword();
                       }}
-                      className="rounded accent-indigo-500"
+                      className="rounded accent-[#3b7a57]"
                     />
                     <span>Uppercase (A-Z)</span>
                   </label>
 
-                  <label className="flex items-center gap-2 text-slate-300 cursor-pointer">
+                  <label className="flex items-center gap-2 text-stone-700 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={incLower}
@@ -443,12 +443,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                         setIncLower(e.target.checked);
                         handleRegeneratePassword();
                       }}
-                      className="rounded accent-indigo-500"
+                      className="rounded accent-[#3b7a57]"
                     />
                     <span>Lowercase (a-z)</span>
                   </label>
 
-                  <label className="flex items-center gap-2 text-slate-300 cursor-pointer">
+                  <label className="flex items-center gap-2 text-stone-700 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={incNumbers}
@@ -456,12 +456,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                         setIncNumbers(e.target.checked);
                         handleRegeneratePassword();
                       }}
-                      className="rounded accent-indigo-500"
+                      className="rounded accent-[#3b7a57]"
                     />
                     <span>Numbers (0-9)</span>
                   </label>
 
-                  <label className="flex items-center gap-2 text-slate-300 cursor-pointer">
+                  <label className="flex items-center gap-2 text-stone-700 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={incSymbols}
@@ -469,7 +469,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                         setIncSymbols(e.target.checked);
                         handleRegeneratePassword();
                       }}
-                      className="rounded accent-indigo-500"
+                      className="rounded accent-[#3b7a57]"
                     />
                     <span>Symbols (!@#$%)</span>
                   </label>
@@ -481,15 +481,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
           {/* TAB 4: PASSWORD RECOVERY */}
           {activeTab === 'RECOVERY' && (
             <div className="space-y-4">
-              <div className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-300">
-                <p className="font-semibold text-white mb-1">Encrypted Password Reset Workflow</p>
+              <div className="p-3 bg-[#e1efe6]/80 border border-[#bcdcc7] rounded-xl text-xs text-stone-800">
+                <p className="font-semibold text-emerald-900 mb-1">Encrypted Password Reset Workflow</p>
                 <p>
                   Submit your corporate email address to receive an E2E encrypted recovery key and reset instructions.
                 </p>
               </div>
 
               {recoverySent ? (
-                <div className="p-3 bg-emerald-950/50 border border-emerald-800 text-emerald-200 text-xs rounded-xl">
+                <div className="p-3 bg-[#e1efe6] border border-[#bcdcc7] text-emerald-900 text-xs rounded-xl">
                   Password reset link with E2E encrypted token sent to <strong>{recoveryEmail}</strong>.
                 </div>
               ) : (
@@ -501,18 +501,18 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialTab, onClos
                   className="space-y-3"
                 >
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Account Email</label>
+                    <label className="block text-xs font-semibold text-stone-700 mb-1">Account Email</label>
                     <input
                       type="email"
                       value={recoveryEmail}
                       onChange={(e) => setRecoveryEmail(e.target.value)}
                       required
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                      className="input-style w-full"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg text-xs shadow transition"
+                    className="w-full py-2.5 bg-[#3b7a57] hover:bg-[#2d6144] text-white font-medium rounded-xl text-xs shadow-xs transition cursor-pointer"
                   >
                     Send Encrypted Recovery Token
                   </button>

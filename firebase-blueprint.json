@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profiles",
+      "description": "User accounts and permissions in ERP",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "department": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "name", "role", "department"]
+    },
+    "salesOrders": {
+      "title": "Sales Orders & Bookings",
+      "description": "Sales bookings and customer orders",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string" },
+        "customer": { "type": "string" },
+        "userId": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "date": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["orderNumber", "customer", "totalAmount", "status", "date"]
+    },
+    "manufacturingOrders": {
+      "title": "Manufacturing Orders",
+      "description": "Production MO bookings",
+      "type": "object",
+      "properties": {
+        "moNumber": { "type": "string" },
+        "productId": { "type": "string" },
+        "targetQty": { "type": "number" },
+        "state": { "type": "string" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["moNumber", "productId", "targetQty", "state"]
+    }
+  }
+}

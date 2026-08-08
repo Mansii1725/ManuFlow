@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, ChevronRight, ChevronDown, Package, Plus, Calculator, AlertTriangle, Layers3, ArrowUpRight, DollarSign, Clock, ShieldAlert } from 'lucide-react';
+import { Layers, ChevronRight, ChevronDown, Package, Plus, Calculator, Layers3 } from 'lucide-react';
 import { BomItem } from '../types/mrp';
 
 interface BomExplorerProps {
@@ -12,10 +12,11 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
     bom_ev_drive_800: true,
     bom_sub_battery: true,
     bom_sub_motor: true,
+    bom_tbl_001: true,
   });
 
   // Exploded BOM Calculator States
-  const [selectedProductPart, setSelectedProductPart] = useState('EV-DRIVE-800KW');
+  const [selectedProductPart, setSelectedProductPart] = useState('TBL-WOOD-001');
   const [targetBatchQuantity, setTargetBatchQuantity] = useState(25);
   const [explodedResults, setExplodedResults] = useState<any[] | null>(null);
   const [calculatedTotalCost, setCalculatedTotalCost] = useState<number | null>(null);
@@ -79,59 +80,54 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
     const isExpanded = !!expandedNodes[node.id];
 
     const categoryColors = {
-      FINISHED_GOOD: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
-      SUB_ASSEMBLY: 'bg-indigo-500/10 text-indigo-300 border-indigo-500/30',
-      RAW_MATERIAL: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
-      COMPONENT: 'bg-sky-500/10 text-sky-300 border-sky-500/30',
+      FINISHED_GOOD: 'bg-[#e1efe6] text-emerald-900 border-[#b2d8be]',
+      SUB_ASSEMBLY: 'bg-teal-100 text-teal-900 border-teal-200',
+      RAW_MATERIAL: 'bg-amber-100 text-amber-900 border-amber-200',
+      COMPONENT: 'bg-stone-200 text-stone-800 border-stone-300',
     };
 
     return (
       <div key={node.id} className="select-none">
         <div
-          className={`flex items-center justify-between p-2.5 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-900/60 transition mb-1 text-xs`}
+          className="flex items-center justify-between p-3 rounded-xl border border-[#dcd6c8] hover:border-[#3b7a57] bg-[#fbf9f5] transition mb-1.5 text-xs shadow-2xs"
           style={{ marginLeft: `${depth * 20}px` }}
         >
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {hasChildren ? (
               <button
                 onClick={() => toggleNode(node.id)}
-                className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800"
+                className="p-1 text-stone-500 hover:text-stone-900 rounded hover:bg-stone-200 cursor-pointer"
               >
-                {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
               </button>
             ) : (
-              <div className="w-5" />
+              <div className="w-6" />
             )}
 
-            <Package className="w-4 h-4 text-slate-400 shrink-0" />
+            <Package className="w-4 h-4 text-stone-500 shrink-0" />
 
-            <span className="font-mono font-semibold text-slate-200">{node.partNumber}</span>
-            <span className="text-slate-300 truncate font-medium">{node.name}</span>
+            <span className="font-mono font-bold text-emerald-900">{node.partNumber}</span>
+            <span className="text-stone-800 truncate font-medium">{node.name}</span>
 
             <span className={`px-2 py-0.5 text-[10px] rounded-md border font-semibold ${categoryColors[node.category]}`}>
               {node.category.replace('_', ' ')}
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400 text-[11px] shrink-0">
+          <div className="flex items-center gap-4 text-stone-700 text-xs shrink-0 font-medium">
             <div>
-              <span>Qty Req: </span>
-              <strong className="text-white">{node.quantityRequired} {node.unitOfMeasure}</strong>
+              <span className="text-stone-500">Qty Req: </span>
+              <strong className="text-stone-900">{node.quantityRequired} {node.unitOfMeasure}</strong>
             </div>
 
             <div>
-              <span>Scrap Factor: </span>
-              <strong className="text-amber-400">{((node.scrapFactor || 0) * 100).toFixed(1)}%</strong>
+              <span className="text-stone-500">Unit Cost: </span>
+              <strong className="text-emerald-800">${node.unitCost.toLocaleString()}</strong>
             </div>
 
-            <div>
-              <span>Unit Cost: </span>
-              <strong className="text-emerald-400">${node.unitCost.toLocaleString()}</strong>
-            </div>
-
-            <div className="flex items-center gap-1 bg-slate-950 px-2 py-1 rounded border border-slate-800">
-              <span>Stock: </span>
-              <strong className={node.currentStock < node.reorderPoint ? 'text-rose-400 font-bold' : 'text-slate-200'}>
+            <div className="flex items-center gap-1 bg-[#f0ebd9] px-2 py-1 rounded-lg border border-[#d2cbba] font-mono text-[11px]">
+              <span className="text-stone-500">Stock: </span>
+              <strong className={node.currentStock < node.reorderPoint ? 'text-rose-700 font-bold' : 'text-stone-800'}>
                 {node.currentStock.toLocaleString()}
               </strong>
             </div>
@@ -150,26 +146,28 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
   return (
     <div className="space-y-6">
       
-      {/* Top Banner & Control Actions */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-5">
+      {/* Top Banner */}
+      <div className="glass-card p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-indigo-500/20 text-indigo-400 rounded-lg">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-[#e1efe6] text-emerald-800 border border-[#bcdcc7] rounded-xl">
               <Layers className="w-5 h-5" />
             </div>
-            <h2 className="text-base font-bold text-white font-mono">Recursive Multi-Level Bill of Materials (BOM)</h2>
+            <div>
+              <h2 className="text-base font-bold text-stone-800">Multi-Level Bill of Materials (BOM)</h2>
+              <p className="text-xs text-stone-600 mt-0.5">
+                Hierarchical tree recipe structure for finished goods, sub-assemblies, and raw component parts.
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Hierarchical recipe mapping for Assemblies, Sub-assemblies, Components & Raw Materials with Scrap Adjustments.
-          </p>
         </div>
 
         <button
           onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center gap-1.5 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold shadow transition"
+          className="flex items-center gap-1.5 px-4 py-2 bg-[#3b7a57] hover:bg-[#2d6144] text-white rounded-xl text-xs font-semibold shadow-xs transition cursor-pointer"
         >
           <Plus className="w-4 h-4" />
-          <span>Add BOM Item</span>
+          <span>Add BOM Part</span>
         </button>
       </div>
 
@@ -177,43 +175,44 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Column: BOM Tree Hierarchy */}
-        <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-mono">
-              Assembly Hierarchy Tree
+        <div className="lg:col-span-7 glass-card p-5 space-y-3">
+          <div className="flex items-center justify-between pb-3 border-b border-[#e2ddd0]">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-800 font-mono">
+              Assembly Recipe Tree
             </h3>
-            <span className="text-[11px] text-slate-400">Click arrows to expand sub-assemblies</span>
+            <span className="text-xs text-stone-500">Click arrows to expand parts</span>
           </div>
 
-          <div className="space-y-1 max-h-[500px] overflow-y-auto pr-1">
+          <div className="space-y-1.5 max-h-[500px] overflow-y-auto pr-1">
             {bomData.map((node) => renderBomTreeNode(node, 0))}
           </div>
         </div>
 
         {/* Right Column: Exploded BOM Requirement Engine */}
-        <div className="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
-            <Calculator className="w-4 h-4 text-emerald-400" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white font-mono">
+        <div className="lg:col-span-5 glass-card p-5 space-y-4">
+          <div className="flex items-center gap-2 pb-3 border-b border-[#e2ddd0]">
+            <Calculator className="w-4 h-4 text-emerald-800" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-800 font-mono">
               Exploded BOM Requirement Engine
             </h3>
           </div>
 
           <div className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Select Target Finished Good</label>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">Target Product</label>
               <select
                 value={selectedProductPart}
                 onChange={(e) => setSelectedProductPart(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                className="input-style"
               >
-                <option value="EV-DRIVE-800KW">EV-DRIVE-800KW (800kW EV Drive Unit)</option>
-                <option value="BAT-PACK-100KWH">BAT-PACK-100KWH (100kWh Battery Pack)</option>
+                <option value="TBL-WOOD-001" className="bg-[#fbf9f5] text-stone-800">TBL-WOOD-001 (Wooden Table - Solid Oak)</option>
+                <option value="EV-DRIVE-800KW" className="bg-[#fbf9f5] text-stone-800">EV-DRIVE-800KW (800kW EV Drive Unit)</option>
+                <option value="BAT-PACK-100KWH" className="bg-[#fbf9f5] text-stone-800">BAT-PACK-100KWH (100kWh Battery Pack)</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Target Production Batch Quantity</label>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">Production Batch Quantity</label>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -221,14 +220,14 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
                   max={1000}
                   value={targetBatchQuantity}
                   onChange={(e) => setTargetBatchQuantity(Math.max(1, Number(e.target.value)))}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="input-style font-mono"
                 />
                 <button
                   onClick={handleCalculateExplosion}
                   disabled={isCalculating}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg text-xs transition flex items-center gap-1.5 shrink-0"
+                  className="px-4 py-2 bg-[#3b7a57] hover:bg-[#2d6144] text-white font-semibold rounded-xl text-xs transition flex items-center gap-1.5 shrink-0 shadow-xs cursor-pointer"
                 >
-                  <Layers3 className="w-3.5 h-3.5" />
+                  <Layers3 className="w-4 h-4" />
                   <span>{isCalculating ? 'Exploding...' : 'Explode BOM'}</span>
                 </button>
               </div>
@@ -237,47 +236,47 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
 
           {/* Calculation Results Output */}
           {explodedResults && (
-            <div className="pt-3 border-t border-slate-800 space-y-3">
-              <div className="p-3 bg-emerald-950/40 border border-emerald-800/50 rounded-xl flex items-center justify-between">
+            <div className="pt-3 border-t border-[#e2ddd0] space-y-3">
+              <div className="p-4 bg-[#e1efe6] border border-[#b8dbc4] rounded-xl flex items-center justify-between">
                 <div>
-                  <span className="text-[11px] text-emerald-300 font-medium">Calculated Rollup Cost</span>
-                  <p className="text-base font-bold font-mono text-emerald-400">
+                  <span className="text-xs text-emerald-900 font-semibold block">Total Estimated Material Cost</span>
+                  <p className="text-lg font-bold font-mono text-emerald-800 mt-0.5">
                     ${calculatedTotalCost?.toLocaleString()}
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-[11px] text-slate-400">Unique Components</span>
-                  <p className="text-xs font-bold text-slate-200">{explodedResults.length} Items</p>
+                  <span className="text-xs text-stone-600 block">Required Parts</span>
+                  <p className="text-xs font-bold text-stone-900">{explodedResults.length} Components</p>
                 </div>
               </div>
 
-              <div className="max-h-60 overflow-y-auto space-y-1.5 pr-1 text-xs">
+              <div className="max-h-60 overflow-y-auto space-y-2 pr-1 text-xs">
                 {explodedResults.map((item, idx) => (
                   <div
                     key={idx}
-                    className={`p-2.5 rounded-lg border flex items-center justify-between ${
+                    className={`p-3 rounded-xl border flex items-center justify-between ${
                       item.reorderNeeded
-                        ? 'bg-rose-950/30 border-rose-800/60 text-rose-200'
-                        : 'bg-slate-950 border-slate-800 text-slate-200'
+                        ? 'bg-rose-50 border-rose-200 text-rose-800'
+                        : 'bg-[#fbf9f5] border-[#dcd6c8] text-stone-800'
                     }`}
                   >
                     <div>
-                      <div className="flex items-center gap-1.5 font-mono font-semibold">
+                      <div className="flex items-center gap-1.5 font-mono font-bold">
                         <span>{item.partNumber}</span>
                         {item.reorderNeeded && (
-                          <span className="px-1.5 py-0.2 bg-rose-500/20 text-rose-300 text-[9px] rounded border border-rose-500/30">
+                          <span className="px-1.5 py-0.2 bg-rose-100 text-rose-800 text-[10px] rounded font-semibold border border-rose-200">
                             Reorder Needed
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-slate-400 truncate max-w-[180px]">{item.name}</p>
+                      <p className="text-xs text-stone-600 truncate max-w-[180px]">{item.name}</p>
                     </div>
 
                     <div className="text-right font-mono">
-                      <div className="font-bold text-white">
+                      <div className="font-bold text-stone-900">
                         {item.requiredQty.toLocaleString()} {item.uom}
                       </div>
-                      <div className="text-[10px] text-slate-400">Stock: {item.stock.toLocaleString()}</div>
+                      <div className="text-[11px] text-stone-500">Stock: {item.stock.toLocaleString()}</div>
                     </div>
                   </div>
                 ))}
@@ -291,82 +290,82 @@ export const BomExplorer: React.FC<BomExplorerProps> = ({ bomData, onAddBomItem 
 
       {/* Add New BOM Item Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-white space-y-4">
-            <h3 className="text-sm font-bold font-mono">Register New Part in BOM Catalog</h3>
+        <div className="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-[#fbf9f5] border border-[#d6d0c0] max-w-md w-full p-6 text-stone-800 space-y-4 shadow-xl rounded-2xl">
+            <h3 className="text-base font-bold text-stone-800">Register New Part in BOM Catalog</h3>
 
             <form onSubmit={handleAddNewItem} className="space-y-3 text-xs">
               <div>
-                <label className="block text-slate-300 mb-1">Part Number</label>
+                <label className="block text-stone-700 font-semibold mb-1">Part Number</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. SENSOR-TEMP-800V"
                   value={newPartNumber}
                   onChange={(e) => setNewPartNumber(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500 font-mono"
+                  className="input-style font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 mb-1">Part / Component Name</label>
+                <label className="block text-stone-700 font-semibold mb-1">Part / Component Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. High Precision Thermal Sensor"
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500"
+                  className="input-style font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 mb-1">Category Classification</label>
+                <label className="block text-stone-700 font-semibold mb-1">Category Classification</label>
                 <select
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value as any)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500"
+                  className="input-style"
                 >
-                  <option value="FINISHED_GOOD">Finished Good</option>
-                  <option value="SUB_ASSEMBLY">Sub-assembly</option>
-                  <option value="COMPONENT">Component</option>
-                  <option value="RAW_MATERIAL">Raw Material</option>
+                  <option value="FINISHED_GOOD" className="bg-[#fbf9f5] text-stone-800">Finished Good</option>
+                  <option value="SUB_ASSEMBLY" className="bg-[#fbf9f5] text-stone-800">Sub-assembly</option>
+                  <option value="COMPONENT" className="bg-[#fbf9f5] text-stone-800">Component</option>
+                  <option value="RAW_MATERIAL" className="bg-[#fbf9f5] text-stone-800">Raw Material</option>
                 </select>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 mb-1">Unit Cost ($)</label>
+                  <label className="block text-stone-700 font-semibold mb-1">Unit Cost ($)</label>
                   <input
                     type="number"
                     value={newUnitCost}
                     onChange={(e) => setNewUnitCost(Number(e.target.value))}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500"
+                    className="input-style font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 mb-1">Initial Stock</label>
+                  <label className="block text-stone-700 font-semibold mb-1">Initial Stock</label>
                   <input
                     type="number"
                     value={newStock}
                     onChange={(e) => setNewStock(Number(e.target.value))}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500"
+                    className="input-style font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-2">
+              <div className="flex justify-end gap-2 pt-3">
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg"
+                  className="px-4 py-2 bg-[#eae5d8] hover:bg-[#ded8c8] text-stone-700 font-semibold rounded-xl cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg"
+                  className="px-4 py-2 bg-[#3b7a57] hover:bg-[#2d6144] text-white font-semibold rounded-xl cursor-pointer shadow-xs"
                 >
                   Save to BOM
                 </button>
