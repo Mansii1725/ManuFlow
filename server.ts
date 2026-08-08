@@ -341,39 +341,84 @@ async function startServer() {
     const moId = `mo_${Date.now()}`;
     const orderNumber = `MO-${Math.floor(80000 + Math.random() * 9999)}`;
 
-    // Auto-generate standard Work Orders based on operations
-    const workOrders: WorkOrder[] = [
-      {
-        id: `wo_${moId}_01`,
-        moId,
-        sequence: 1,
-        operationName: 'Sub-assembly 1: Battery & Module Stacking',
-        workCenter: 'Station Alpha - Battery Bay',
-        status: 'PLANNED',
-        plannedDurationHours: 10,
-        materialsRequired: [{ partNumber: 'BAT-PACK-100KWH', name: '100kWh Battery Pack', qty: targetQuantity, uom: 'UNIT', issued: false }],
-      },
-      {
-        id: `wo_${moId}_02`,
-        moId,
-        sequence: 2,
-        operationName: 'Sub-assembly 2: Motor Stator Winding',
-        workCenter: 'Station Beta - Precision Winding',
-        status: 'PLANNED',
-        plannedDurationHours: 12,
-        materialsRequired: [{ partNumber: 'MOT-DUAL-400KW', name: 'Dual Permanent Magnet Motor', qty: targetQuantity, uom: 'UNIT', issued: false }],
-      },
-      {
-        id: `wo_${moId}_03`,
-        moId,
-        sequence: 3,
-        operationName: 'Final Assembly & Dynamometer Testing',
-        workCenter: 'Station Delta - End of Line QA',
-        status: 'PLANNED',
-        plannedDurationHours: 8,
-        materialsRequired: [{ partNumber: productPartNumber, name: productName || productPartNumber, qty: targetQuantity, uom: 'UNIT', issued: false }],
-      },
-    ];
+    // Auto-generate standard Work Orders based on product BOM operations
+    let workOrders: WorkOrder[] = [];
+
+    if (productPartNumber === 'TBL-WOOD-001') {
+      workOrders = [
+        {
+          id: `wo_${moId}_01`,
+          moId,
+          sequence: 1,
+          operationName: 'Assembly (Screws & Joint Fastening)',
+          workCenter: 'Assembly Line Alpha',
+          status: 'PLANNED',
+          plannedDurationHours: 1.0,
+          materialsRequired: [
+            { partNumber: 'LEG-WOOD-01', name: 'Wooden Table Leg', qty: targetQuantity * 4, uom: 'PCS', issued: false },
+            { partNumber: 'TOP-OAK-01', name: 'Oak Table Top Slab', qty: targetQuantity, uom: 'PCS', issued: false },
+            { partNumber: 'SCR-STL-12', name: 'Steel Screws', qty: targetQuantity * 12, uom: 'PCS', issued: false },
+          ],
+        },
+        {
+          id: `wo_${moId}_02`,
+          moId,
+          sequence: 2,
+          operationName: 'Painting & Gloss Varnish Coating',
+          workCenter: 'Paint Floor Beta',
+          status: 'PLANNED',
+          plannedDurationHours: 0.5,
+          materialsRequired: [
+            { partNumber: 'VAR-GLOSS-01', name: 'Polyurethane Gloss Varnish', qty: targetQuantity, uom: 'BTL', issued: false },
+          ],
+        },
+        {
+          id: `wo_${moId}_03`,
+          moId,
+          sequence: 3,
+          operationName: 'Packing & Protective Crate Shipping',
+          workCenter: 'Packaging Line Gamma',
+          status: 'PLANNED',
+          plannedDurationHours: 0.33,
+          materialsRequired: [
+            { partNumber: productPartNumber, name: productName || productPartNumber, qty: targetQuantity, uom: 'UNIT', issued: false },
+          ],
+        },
+      ];
+    } else {
+      workOrders = [
+        {
+          id: `wo_${moId}_01`,
+          moId,
+          sequence: 1,
+          operationName: 'Sub-assembly 1: Battery & Module Stacking',
+          workCenter: 'Station Alpha - Battery Bay',
+          status: 'PLANNED',
+          plannedDurationHours: 10,
+          materialsRequired: [{ partNumber: 'BAT-PACK-100KWH', name: '100kWh Battery Pack', qty: targetQuantity, uom: 'UNIT', issued: false }],
+        },
+        {
+          id: `wo_${moId}_02`,
+          moId,
+          sequence: 2,
+          operationName: 'Sub-assembly 2: Motor Stator Winding',
+          workCenter: 'Station Beta - Precision Winding',
+          status: 'PLANNED',
+          plannedDurationHours: 12,
+          materialsRequired: [{ partNumber: 'MOT-DUAL-400KW', name: 'Dual Permanent Magnet Motor', qty: targetQuantity, uom: 'UNIT', issued: false }],
+        },
+        {
+          id: `wo_${moId}_03`,
+          moId,
+          sequence: 3,
+          operationName: 'Final Assembly & Dynamometer Testing',
+          workCenter: 'Station Delta - End of Line QA',
+          status: 'PLANNED',
+          plannedDurationHours: 8,
+          materialsRequired: [{ partNumber: productPartNumber, name: productName || productPartNumber, qty: targetQuantity, uom: 'UNIT', issued: false }],
+        },
+      ];
+    }
 
     const newMo: ManufacturingOrder = {
       id: moId,

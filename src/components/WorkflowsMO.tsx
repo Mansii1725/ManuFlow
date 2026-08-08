@@ -231,6 +231,7 @@ export const WorkflowsMO: React.FC<WorkflowsMOProps> = ({ orders, currentUser, o
                   onChange={(e) => setSelectedProductPart(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500 font-mono"
                 >
+                  <option value="TBL-WOOD-001">TBL-WOOD-001 (Wooden Table - Solid Oak Recipe)</option>
                   <option value="EV-DRIVE-800KW">EV-DRIVE-800KW (800kW Electric Vehicle Drive Unit)</option>
                   <option value="BAT-PACK-100KWH">BAT-PACK-100KWH (100kWh Battery Pack)</option>
                 </select>
