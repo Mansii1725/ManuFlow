@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
+import nodemailer from 'nodemailer';
 import {
   INITIAL_USERS,
   INITIAL_BOM,
@@ -93,16 +94,103 @@ async function startServer() {
     next();
   });
 
+  // --- SMTP MAIL TRANSPORTER HELPER ---
+  const getSmtpTransporter = () => {
+    const host = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const port = parseInt(process.env.SMTP_PORT || '587', 10);
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+
+    if (!user || !pass) {
+      return null;
+    }
+
+    return nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+      tls: { rejectUnauthorized: false }
+    });
+  };
+
+  // Dedicated custom SMTP send endpoint
+  app.post('/api/smtp/send', async (req: Request, res: Response) => {
+    const { to, subject, text, html } = req.body;
+    if (!to || !subject) {
+      return res.status(400).json({ error: 'Recipient "to" and "subject" are required.' });
+    }
+
+    const transporter = getSmtpTransporter();
+    if (!transporter) {
+      return res.status(400).json({
+        error: 'SMTP credentials missing',
+        message: 'To enable server-side SMTP email dispatching, set SMTP_USER and SMTP_PASS environment variables.',
+        requiresEnv: ['SMTP_USER', 'SMTP_PASS', 'SMTP_HOST (optional)', 'SMTP_PORT (optional)']
+      });
+    }
+
+    try {
+      const info = await transporter.sendMail({
+        from: process.env.SMTP_FROM || process.env.SMTP_USER,
+        to,
+        subject,
+        text: text || '',
+        html: html || `<p>${text || subject}</p>`
+      });
+
+      res.json({
+        success: true,
+        messageId: info.messageId,
+        accepted: info.accepted,
+        message: `Email successfully sent to ${to}`
+      });
+    } catch (err: any) {
+      console.error('SMTP Mail error:', err);
+      res.status(500).json({
+        error: 'SMTP delivery failed',
+        details: err?.message || String(err)
+      });
+    }
+  });
+
   // --- AUTHENTICATION & SECURITY ENDPOINTS ---
 
   // Generate OTP
-  app.post('/api/auth/otp/send', (req: Request, res: Response) => {
+  app.post('/api/auth/otp/send', async (req: Request, res: Response) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
     }
     const otpObj = generateOtpCode();
     otpStore.set(email, otpObj);
+
+    // Attempt real SMTP mail dispatch if transporter exists
+    let smtpStatus = 'SIMULATED';
+    const transporter = getSmtpTransporter();
+    if (transporter) {
+      try {
+        await transporter.sendMail({
+          from: process.env.SMTP_FROM || process.env.SMTP_USER,
+          to: email,
+          subject: 'Your ERP Security OTP Code',
+          html: `<div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; rounded: 8px;">
+            <h2>Manufacturing ERP Authentication Code</h2>
+            <p>Your one-time passcode is:</p>
+            <h1 style="letter-spacing: 4px; color: #1e293b; background: #f1f5f9; padding: 10px 16px; display: inline-block;">${otpObj.code}</h1>
+            <p style="color: #64748b; font-size: 12px;">This code expires in 5 minutes. Do not share it with anyone.</p>
+          </div>`
+        });
+        smtpStatus = 'DELIVERED_VIA_SMTP';
+      } catch (err: any) {
+        if (err?.code === 'EAUTH' || String(err?.message).includes('535')) {
+          console.warn(`SMTP Authentication notice: Invalid SMTP credentials provided in environment (${process.env.SMTP_USER || 'none'}). Falling back to simulated OTP verification.`);
+        } else {
+          console.warn('SMTP Email dispatch notice:', err?.message || err);
+        }
+        smtpStatus = 'SMTP_FAILED_FALLBACK_SIMULATION';
+      }
+    }
 
     // Record audit log
     auditLogs.unshift({
@@ -113,8 +201,8 @@ async function startServer() {
       userRole: 'SHOP_FLOOR_OPERATOR',
       actionType: 'LOGIN_OTP',
       resourceTarget: 'EMAIL_OTP_DISPATCH',
-      detailsEncrypted: simulateE2EEncrypt(`Dispatched 6-digit OTP code to ${email}`),
-      detailsDecryptedForAdmin: `Dispatched 6-digit OTP code to ${email}`,
+      detailsEncrypted: simulateE2EEncrypt(`Dispatched 6-digit OTP code to ${email} (Status: ${smtpStatus})`),
+      detailsDecryptedForAdmin: `Dispatched 6-digit OTP code to ${email} (Status: ${smtpStatus})`,
       ipAddress: (req.headers['x-forwarded-for'] as string) || '192.168.10.45',
       complianceFlag: 'NORMAL',
     });
@@ -122,7 +210,7 @@ async function startServer() {
     res.json({
       success: true,
       message: `OTP generated and dispatched to ${email}`,
-      otpPreviewForDemo: otpObj.code, // Returned for easy testing in UI
+      smtpDeliveryStatus: smtpStatus,
       expiresInSeconds: 300,
     });
   });
