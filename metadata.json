@@ -1,0 +1,6 @@
+{
+  "name": "Manufacturing MRP & Production ERP System",
+  "description": "Enterprise MRP system featuring state-driven workflows, recursive BOM hierarchies, real-time inventory ledger, RBAC, audit logging, OTP/2FA auth with E2E encryption, and third-party cloud sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
