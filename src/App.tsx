@@ -627,20 +627,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen gradient-mesh text-zinc-100 flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col md:flex-row font-sans">
       
       {/* SIDEBAR NAVIGATION */}
-      <aside className="w-full md:w-64 glass border-r border-white/10 flex flex-col shrink-0 z-30">
+      <aside className="w-full md:w-64 bg-slate-900 border-r border-slate-800 text-slate-300 flex flex-col shrink-0 z-30">
         
         {/* Brand Header */}
-        <div className="p-5 border-b border-white/10 flex items-center justify-between">
+        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-violet-500/20">
-              <Factory className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-100 shadow-sm">
+              <Factory className="w-5 h-5 text-slate-200" />
             </div>
             <div>
-              <h2 className="text-sm font-extrabold text-white tracking-tight">ERP Platform</h2>
-              <p className="text-[10px] text-violet-400 font-mono">Working Model v1.0</p>
+              <h2 className="text-sm font-bold text-white tracking-tight">Manufacturing ERP</h2>
+              <p className="text-[10px] text-slate-400 font-mono">Enterprise Edition</p>
             </div>
           </div>
         </div>
@@ -652,29 +652,29 @@ export default function App() {
           <div>
             <button
               onClick={() => setActiveTab('dashboard')}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'dashboard'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 shadow-sm'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700 shadow-sm'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
-              <LayoutDashboard className="w-4 h-4 text-violet-400" />
+              <LayoutDashboard className="w-4 h-4 text-slate-300" />
               <span>Unified Dashboard</span>
             </button>
           </div>
 
           {/* Phase 2: Manufacturing Operations (MRP) */}
           <div className="space-y-1">
-            <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-zinc-500 font-mono">
+            <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono">
               Manufacturing (MRP)
             </span>
             
             <button
               onClick={() => setActiveTab('mfg-products')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'mfg-products'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Package className="w-4 h-4" />
@@ -683,10 +683,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('mfg-workcenters')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'mfg-workcenters'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Settings className="w-4 h-4" />
@@ -695,10 +695,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('mfg-bom')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'mfg-bom'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Layers className="w-4 h-4" />
@@ -707,10 +707,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('mfg-orders')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'mfg-orders'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <ClipboardList className="w-4 h-4" />
@@ -719,10 +719,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('mfg-shopfloor')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'mfg-shopfloor'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Timer className="w-4 h-4" />
@@ -731,10 +731,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('mfg-stockledger')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'mfg-stockledger'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <BookOpen className="w-4 h-4" />
@@ -744,16 +744,16 @@ export default function App() {
 
           {/* Phase 3: Shiv Accounts Cloud */}
           <div className="space-y-1">
-            <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-zinc-500 font-mono">
-              Shiv Accounts Cloud
+            <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono">
+              Accounts & Finance
             </span>
 
             <button
               onClick={() => setActiveTab('acc-coa')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'acc-coa'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Landmark className="w-4 h-4" />
@@ -762,10 +762,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('acc-contacts')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'acc-contacts'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -774,10 +774,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('acc-sales')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'acc-sales'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Receipt className="w-4 h-4" />
@@ -786,10 +786,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('acc-journal')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'acc-journal'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -798,10 +798,10 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('acc-reports')}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition cursor-pointer ${
                 activeTab === 'acc-reports'
-                  ? 'bg-violet-600/30 text-white border border-violet-500/40 font-semibold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-slate-800 text-white font-semibold border border-slate-700'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <TrendingUp className="w-4 h-4" />
@@ -812,24 +812,24 @@ export default function App() {
         </nav>
 
         {/* User Footer */}
-        <div className="p-4 border-t border-white/10 flex items-center justify-between">
+        <div className="p-4 border-t border-slate-800 flex items-center justify-between">
           <div
             onClick={() => setIsProfileOpen(true)}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-8 h-8 rounded-xl bg-violet-600/30 text-violet-300 font-bold flex items-center justify-center text-xs border border-violet-500/30">
+            <div className="w-8 h-8 rounded-lg bg-slate-800 text-slate-200 font-bold flex items-center justify-center text-xs border border-slate-700">
               {currentUser.name.substring(0, 2).toUpperCase()}
             </div>
             <div>
-              <p className="text-xs font-bold text-white group-hover:text-violet-300 transition">{currentUser.name}</p>
-              <p className="text-[10px] text-zinc-400 font-mono">ROLE: {currentUser.role}</p>
+              <p className="text-xs font-bold text-white group-hover:text-slate-200 transition">{currentUser.name}</p>
+              <p className="text-[10px] text-slate-400 font-mono">ROLE: {currentUser.role}</p>
             </div>
           </div>
 
           <button
             onClick={handleLogout}
             title="Sign Out"
-            className="p-1.5 text-zinc-400 hover:text-rose-400 transition cursor-pointer rounded-lg hover:bg-white/5"
+            className="p-1.5 text-slate-400 hover:text-rose-400 transition cursor-pointer rounded-lg hover:bg-slate-800"
           >
             <LogOut className="w-4 h-4" />
           </button>
@@ -841,40 +841,14 @@ export default function App() {
       <main className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-6">
 
         {/* Top Header Controls Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30 uppercase">
+              <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-200 text-slate-800 border border-slate-300 uppercase">
                 {currentUser.department}
               </span>
-              <span className="text-xs text-zinc-400 font-mono">Logged in as {currentUser.email}</span>
+              <span className="text-xs text-slate-600 font-medium">User: {currentUser.email}</span>
             </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsCloudSyncOpen(true)}
-              className="btn-secondary text-xs"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Cloud Sync</span>
-            </button>
-
-            <button
-              onClick={() => setIsReportsOpen(true)}
-              className="btn-secondary text-xs"
-            >
-              <FileText className="w-3.5 h-3.5 text-amber-400" />
-              <span>Work Reports</span>
-            </button>
-
-            <button
-              onClick={handleResetDemoData}
-              className="btn-secondary text-xs"
-            >
-              <RefreshCw className="w-3.5 h-3.5 text-violet-400" />
-              <span>Reset Demo Data</span>
-            </button>
           </div>
         </div>
 
@@ -885,83 +859,83 @@ export default function App() {
           {activeTab === 'dashboard' && (
             <motion.div
               key="dashboard"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-2xl font-bold text-white tracking-tight">Unified Operational Dashboard</h1>
-                <p className="text-xs text-zinc-400">Real-time KPIs for Manufacturing MRP & Shiv Accounts Cloud</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Operational Overview</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Key performance indicators for Manufacturing MRP & Financial Accounts</p>
               </div>
 
               {/* 4 Top KPI Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="glass-card p-5 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2">
+                  <div className="flex items-center justify-between text-xs font-medium text-slate-500">
                     <span>Active Manufacturing Orders</span>
-                    <ClipboardList className="w-4 h-4 text-violet-400" />
+                    <ClipboardList className="w-4 h-4 text-slate-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white font-mono">{mos.length} MOs</h3>
-                  <p className="text-[10px] text-violet-400 font-medium">Production Pipeline</p>
+                  <h3 className="text-2xl font-bold text-slate-900 font-mono">{mos.length} MOs</h3>
+                  <p className="text-[11px] text-slate-500">Production Pipeline</p>
                 </div>
 
-                <div className="glass-card p-5 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2">
+                  <div className="flex items-center justify-between text-xs font-medium text-slate-500">
                     <span>Invoiced Sales Revenue</span>
-                    <DollarSign className="w-4 h-4 text-cyan-400" />
+                    <DollarSign className="w-4 h-4 text-slate-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-cyan-400 font-mono">₹{totalInvoicedRevenue.toLocaleString('en-IN')}</h3>
-                  <p className="text-[10px] text-cyan-400 font-medium">Order-to-Cash Invoices</p>
+                  <h3 className="text-2xl font-bold text-slate-900 font-mono">₹{totalInvoicedRevenue.toLocaleString('en-IN')}</h3>
+                  <p className="text-[11px] text-slate-500">Order-to-Cash Invoices</p>
                 </div>
 
-                <div className="glass-card p-5 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2">
+                  <div className="flex items-center justify-between text-xs font-medium text-slate-500">
                     <span>Net Calculated Profit</span>
-                    <TrendingUp className="w-4 h-4 text-emerald-400" />
+                    <TrendingUp className="w-4 h-4 text-slate-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-emerald-400 font-mono">₹{netProfitCalculated.toLocaleString('en-IN')}</h3>
-                  <p className="text-[10px] text-emerald-400 font-medium">Profit & Loss Equation</p>
+                  <h3 className="text-2xl font-bold text-slate-900 font-mono">₹{netProfitCalculated.toLocaleString('en-IN')}</h3>
+                  <p className="text-[11px] text-slate-500">Profit & Loss Equation</p>
                 </div>
 
-                <div className="glass-card p-5 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2">
+                  <div className="flex items-center justify-between text-xs font-medium text-slate-500">
                     <span>Stock Ledger Movements</span>
-                    <Box className="w-4 h-4 text-amber-400" />
+                    <Box className="w-4 h-4 text-slate-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-amber-400 font-mono">{stockLedger.length} Entries</h3>
-                  <p className="text-[10px] text-amber-400 font-medium">Double-Entry Stock Ledger</p>
+                  <h3 className="text-2xl font-bold text-slate-900 font-mono">{stockLedger.length} Entries</h3>
+                  <p className="text-[11px] text-slate-500">Double-Entry Stock Ledger</p>
                 </div>
               </div>
 
               {/* Charts Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
-                <div className="glass-card p-6 space-y-4">
-                  <h3 className="text-sm font-bold text-white flex items-center justify-between">
-                    <span>Financial Performance (Revenue vs Expenses)</span>
-                    <span className="text-xs font-mono text-cyan-400">Shiv Accounts</span>
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-4">
+                  <h3 className="text-sm font-semibold text-slate-900 flex items-center justify-between border-b border-slate-100 pb-3">
+                    <span>Financial Performance</span>
+                    <span className="text-xs text-slate-500 font-normal">Accounts Summary</span>
                   </h3>
                   <div className="h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={[
-                        { name: 'Revenue', amount: totalInvoicedRevenue, fill: '#06b6d4' },
-                        { name: 'Expenses', amount: totalPurchaseExpenses, fill: '#f43f5e' },
-                        { name: 'Net Profit', amount: Math.max(0, netProfitCalculated), fill: '#10b981' }
+                        { name: 'Revenue', amount: totalInvoicedRevenue, fill: '#2563eb' },
+                        { name: 'Expenses', amount: totalPurchaseExpenses, fill: '#64748b' },
+                        { name: 'Net Profit', amount: Math.max(0, netProfitCalculated), fill: '#16a34a' }
                       ]}>
-                        <XAxis dataKey="name" stroke="#a1a1aa" fontSize={12} />
-                        <YAxis stroke="#a1a1aa" fontSize={12} />
-                        <Tooltip contentStyle={{ backgroundColor: '#181823', borderColor: '#3f3f46', borderRadius: '0.75rem', color: '#fff' }} />
-                        <Bar dataKey="amount" radius={[8, 8, 0, 0]} />
+                        <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} />
+                        <YAxis stroke="#64748b" fontSize={12} tickLine={false} />
+                        <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#cbd5e1', borderRadius: '0.375rem', color: '#0f172a', fontSize: '12px' }} />
+                        <Bar dataKey="amount" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
 
-                <div className="glass-card p-6 space-y-4">
-                  <h3 className="text-sm font-bold text-white flex items-center justify-between">
-                    <span>Manufacturing Orders Pipeline Breakdown</span>
-                    <span className="text-xs font-mono text-violet-400">MRP Workflows</span>
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-4">
+                  <h3 className="text-sm font-semibold text-slate-900 flex items-center justify-between border-b border-slate-100 pb-3">
+                    <span>Manufacturing Orders Breakdown</span>
+                    <span className="text-xs text-slate-500 font-normal">MRP Pipeline</span>
                   </h3>
                   <div className="h-64 w-full flex items-center justify-center">
                     <ResponsiveContainer width="100%" height="100%">
@@ -972,23 +946,23 @@ export default function App() {
                             { name: 'In Progress', value: mos.filter(m => m.state === 'In Progress').length || 1 },
                             { name: 'Completed', value: mos.filter(m => m.state === 'Done').length || 1 }
                           ]}
-                          innerRadius={60}
-                          outerRadius={80}
-                          paddingAngle={5}
+                          innerRadius={55}
+                          outerRadius={75}
+                          paddingAngle={4}
                           dataKey="value"
                         >
                           <Cell fill="#3b82f6" />
                           <Cell fill="#f59e0b" />
-                          <Cell fill="#10b981" />
+                          <Cell fill="#16a34a" />
                         </Pie>
-                        <Tooltip contentStyle={{ backgroundColor: '#181823', borderColor: '#3f3f46', borderRadius: '0.75rem', color: '#fff' }} />
+                        <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#cbd5e1', borderRadius: '0.375rem', color: '#0f172a', fontSize: '12px' }} />
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
-                  <div className="flex justify-center gap-6 text-xs font-mono">
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-500 inline-block" /> Planned</span>
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-amber-500 inline-block" /> In Progress</span>
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" /> Completed</span>
+                  <div className="flex justify-center gap-6 text-xs text-slate-600">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block" /> Planned</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" /> In Progress</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block" /> Completed</span>
                   </div>
                 </div>
 
@@ -1000,15 +974,15 @@ export default function App() {
           {activeTab === 'mfg-products' && (
             <motion.div
               key="products"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-bold text-white">Product Master Configuration</h1>
-                  <p class="text-xs text-zinc-400">Define raw materials and finished goods inventory</p>
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">Product Master Catalog</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Define raw materials and finished goods inventory</p>
                 </div>
                 <button onClick={() => setIsAddProductOpen(true)} className="btn-primary text-xs">
                   <Plus className="w-4 h-4" />
@@ -1016,29 +990,29 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Product Name</th>
-                      <th className="p-4">Category Type</th>
-                      <th className="p-4">Qty on Hand</th>
-                      <th className="p-4">Unit of Measure</th>
+                      <th className="p-3.5">Product Name</th>
+                      <th className="p-3.5">Category Type</th>
+                      <th className="p-3.5">Qty on Hand</th>
+                      <th className="p-3.5">Unit of Measure</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {products.map((p) => (
-                      <tr key={p.id} className="hover:bg-white/5">
-                        <td className="p-4 font-bold text-white">{p.name}</td>
-                        <td className="p-4">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
-                            p.type === 'Finished' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                      <tr key={p.id} className="hover:bg-slate-50">
+                        <td className="p-3.5 font-semibold text-slate-900">{p.name}</td>
+                        <td className="p-3.5">
+                          <span className={`px-2 py-0.5 rounded text-[11px] font-medium border ${
+                            p.type === 'Finished' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-slate-100 text-slate-800 border-slate-200'
                           }`}>
                             {p.type} Material
                           </span>
                         </td>
-                        <td className="p-4 font-mono font-bold text-cyan-300">{p.qtyOnHand}</td>
-                        <td className="p-4 font-mono text-zinc-400">{p.uom}</td>
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">{p.qtyOnHand}</td>
+                        <td className="p-3.5 font-mono text-slate-600">{p.uom}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1051,15 +1025,15 @@ export default function App() {
           {activeTab === 'mfg-workcenters' && (
             <motion.div
               key="workcenters"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-bold text-white">Work Center Configuration</h1>
-                  <p className="text-xs text-zinc-400">Machine capacities (hrs/day), labor rates (₹/hr), and downtime metrics</p>
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">Work Center Operations</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Machine capacities, operational rates, and downtime tracking</p>
                 </div>
                 <button onClick={() => setIsAddWcOpen(true)} className="btn-primary text-xs">
                   <Plus className="w-4 h-4" />
@@ -1067,23 +1041,23 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Work Center</th>
-                      <th className="p-4">Capacity (hrs/day)</th>
-                      <th className="p-4">Rate (₹/hr)</th>
-                      <th className="p-4">Downtime (hrs)</th>
+                      <th className="p-3.5">Work Center</th>
+                      <th className="p-3.5">Capacity</th>
+                      <th className="p-3.5">Rate (₹/hr)</th>
+                      <th className="p-3.5">Downtime (hrs)</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {workCenters.map((w) => (
-                      <tr key={w.id} className="hover:bg-white/5">
-                        <td className="p-4 font-bold text-white">{w.name}</td>
-                        <td className="p-4 font-mono text-violet-300">{w.capacity} hrs/day</td>
-                        <td className="p-4 font-mono text-emerald-400 font-bold">₹{w.costPerHour} / hr</td>
-                        <td className="p-4 font-mono text-rose-400">{w.downtimeHours} hrs</td>
+                      <tr key={w.id} className="hover:bg-slate-50">
+                        <td className="p-3.5 font-semibold text-slate-900">{w.name}</td>
+                        <td className="p-3.5 font-mono text-slate-700">{w.capacity} hrs/day</td>
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">₹{w.costPerHour} / hr</td>
+                        <td className="p-3.5 font-mono text-slate-600">{w.downtimeHours} hrs</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1096,39 +1070,39 @@ export default function App() {
           {activeTab === 'mfg-bom' && (
             <motion.div
               key="bom"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Bill of Materials (BOM) Builder</h1>
-                <p className="text-xs text-zinc-400">Map raw material recipes and quantity ratios to finished products</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Bill of Materials (BOM)</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Component recipes and component ratios required per finished item</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {boms.map((b) => {
                   const finishedProd = products.find((p) => p.id === b.finishedProductId);
                   return (
-                    <div key={b.id} className="glass-card p-5 space-y-4">
-                      <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <div key={b.id} className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                         <div>
-                          <span className="font-mono text-xs font-bold text-violet-400">{b.code}</span>
-                          <h3 className="text-base font-bold text-white mt-0.5">{finishedProd?.name || 'Finished Product'}</h3>
+                          <span className="font-mono text-xs font-semibold text-slate-500">{b.code}</span>
+                          <h3 className="text-base font-bold text-slate-900 mt-0.5">{finishedProd?.name || 'Finished Product'}</h3>
                         </div>
-                        <span className="px-2.5 py-1 text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full">
-                          Target Ratio: 1 Unit
+                        <span className="px-2.5 py-1 text-[11px] font-medium bg-slate-100 text-slate-700 border border-slate-200 rounded">
+                          Batch Ratio: 1 Unit
                         </span>
                       </div>
 
                       <div className="space-y-2 text-xs">
-                        <p className="font-bold text-zinc-300 uppercase tracking-wider text-[10px] font-mono">Required Component Recipe:</p>
+                        <p className="font-semibold text-slate-700 uppercase tracking-wider text-[10px]">Required Component Recipe:</p>
                         {b.components.map((c, idx) => {
                           const rawProd = products.find((p) => p.id === c.rawId);
                           return (
-                            <div key={idx} className="flex justify-between items-center p-2 rounded-lg bg-white/5 font-mono text-xs">
-                              <span className="text-zinc-200">{rawProd?.name || 'Raw Material'}</span>
-                              <span className="text-cyan-300 font-bold">{c.requiredQty} {rawProd?.uom || 'units'}</span>
+                            <div key={idx} className="flex justify-between items-center p-2 rounded bg-slate-50 border border-slate-100 font-mono text-xs">
+                              <span className="text-slate-800">{rawProd?.name || 'Raw Material'}</span>
+                              <span className="text-slate-900 font-semibold">{c.requiredQty} {rawProd?.uom || 'units'}</span>
                             </div>
                           );
                         })}
@@ -1144,15 +1118,15 @@ export default function App() {
           {activeTab === 'mfg-orders' && (
             <motion.div
               key="orders"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-bold text-white">Manufacturing Order (MO) Pipeline</h1>
-                  <p className="text-xs text-zinc-400">Order execution & automated stock movement posting</p>
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">Manufacturing Orders (MO)</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Order execution and automatic inventory movements</p>
                 </div>
                 <button onClick={() => setIsAddMoOpen(true)} className="btn-primary text-xs">
                   <Plus className="w-4 h-4" />
@@ -1160,33 +1134,33 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Order #</th>
-                      <th className="p-4">Target Finished Good</th>
-                      <th className="p-4">Target Qty</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4">Actions</th>
+                      <th className="p-3.5">Order #</th>
+                      <th className="p-3.5">Target Finished Good</th>
+                      <th className="p-3.5">Target Qty</th>
+                      <th className="p-3.5">Status</th>
+                      <th className="p-3.5">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {mos.map((m) => {
                       const prod = products.find((p) => p.id === m.productId);
                       return (
-                        <tr key={m.id} className="hover:bg-white/5">
-                          <td className="p-4 font-mono font-bold text-violet-400">{m.moNumber}</td>
-                          <td className="p-4 font-bold text-white">{prod?.name || 'Product'}</td>
-                          <td className="p-4 font-mono text-cyan-300 font-bold">{m.targetQty} units</td>
-                          <td className="p-4">
-                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${
-                              m.state === 'Done' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                        <tr key={m.id} className="hover:bg-slate-50">
+                          <td className="p-3.5 font-mono font-semibold text-slate-900">{m.moNumber}</td>
+                          <td className="p-3.5 font-semibold text-slate-900">{prod?.name || 'Product'}</td>
+                          <td className="p-3.5 font-mono font-semibold text-slate-800">{m.targetQty} units</td>
+                          <td className="p-3.5">
+                            <span className={`px-2 py-0.5 rounded text-[11px] font-medium border ${
+                              m.state === 'Done' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-amber-50 text-amber-800 border-amber-200'
                             }`}>
                               {m.state}
                             </span>
                           </td>
-                          <td className="p-4">
+                          <td className="p-3.5">
                             {m.state !== 'Done' ? (
                               <button
                                 onClick={() => handleCompleteMo(m.id)}
@@ -1195,8 +1169,8 @@ export default function App() {
                                 Complete MO & Post Stock
                               </button>
                             ) : (
-                              <span className="text-emerald-400 font-bold flex items-center gap-1 text-[11px]">
-                                <CheckCircle2 className="w-3.5 h-3.5" /> Completed & Posted
+                              <span className="text-emerald-700 font-medium flex items-center gap-1 text-[11px]">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Completed & Posted
                               </span>
                             )}
                           </td>
@@ -1213,28 +1187,28 @@ export default function App() {
           {activeTab === 'mfg-shopfloor' && (
             <motion.div
               key="shopfloor"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Shop Floor Controller</h1>
-                <p className="text-xs text-zinc-400">Interactive live execution timers for machine operators</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Shop Floor Execution</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Live operator tracking and work center order timing</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {mos.flatMap((m) =>
                   m.workOrders.map((w) => (
-                    <div key={w.id} className="glass-card p-5 space-y-3">
-                      <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                        <span className="font-bold text-white text-sm">{w.name}</span>
-                        <span className="font-mono text-xs text-violet-400 font-bold">{m.moNumber}</span>
+                    <div key={w.id} className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-3">
+                      <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+                        <span className="font-semibold text-slate-900 text-sm">{w.name}</span>
+                        <span className="font-mono text-xs text-slate-600 font-semibold">{m.moNumber}</span>
                       </div>
-                      <p className="text-xs text-zinc-400">Work Center: <strong className="text-zinc-200">{w.wc}</strong></p>
+                      <p className="text-xs text-slate-600">Work Center: <strong className="text-slate-800">{w.wc}</strong></p>
 
                       <div className="flex items-center justify-between pt-2">
-                        <div className="font-mono text-lg font-bold text-cyan-300">
+                        <div className="font-mono text-lg font-bold text-slate-900">
                           {timerActiveId === w.id ? formatTimer(timerSeconds) : '00:00'}
                         </div>
 
@@ -1242,7 +1216,7 @@ export default function App() {
                           {timerActiveId === w.id ? (
                             <button
                               onClick={() => setTimerActiveId(null)}
-                              className="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                              className="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded text-xs font-medium transition flex items-center gap-1 cursor-pointer"
                             >
                               <Pause className="w-3.5 h-3.5" />
                               <span>Pause</span>
@@ -1250,10 +1224,10 @@ export default function App() {
                           ) : (
                             <button
                               onClick={() => { setTimerActiveId(w.id); setTimerSeconds(0); }}
-                              className="px-3 py-1.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                              className="btn-primary py-1.5 text-xs"
                             >
                               <Play className="w-3.5 h-3.5" />
-                              <span>Start Live Timer</span>
+                              <span>Start Timer</span>
                             </button>
                           )}
                         </div>
@@ -1269,41 +1243,41 @@ export default function App() {
           {activeTab === 'mfg-stockledger' && (
             <motion.div
               key="stockledger"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Automated Stock Ledger</h1>
-                <p className="text-xs text-zinc-400">Double-entry stock movements (Stock-Out for consumption, Stock-In for finished output)</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Stock Ledger</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Automated double-entry material consumption and inventory logs</p>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Timestamp</th>
-                      <th className="p-4">Product</th>
-                      <th className="p-4">Order Ref</th>
-                      <th className="p-4">Qty Movement</th>
-                      <th className="p-4">Balance After</th>
+                      <th className="p-3.5">Timestamp</th>
+                      <th className="p-3.5">Product</th>
+                      <th className="p-3.5">Order Ref</th>
+                      <th className="p-3.5">Qty Movement</th>
+                      <th className="p-3.5">Balance After</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {stockLedger.map((s) => (
-                      <tr key={s.id} className="hover:bg-white/5">
-                        <td className="p-4 font-mono text-zinc-400">{new Date(s.timestamp).toLocaleTimeString()}</td>
-                        <td className="p-4 font-bold text-white">{s.productName}</td>
-                        <td className="p-4 font-mono text-violet-400 font-bold">{s.ref}</td>
-                        <td className="p-4 font-mono font-bold">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[11px] ${
-                            s.change > 0 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'
+                      <tr key={s.id} className="hover:bg-slate-50">
+                        <td className="p-3.5 font-mono text-slate-500">{new Date(s.timestamp).toLocaleTimeString()}</td>
+                        <td className="p-3.5 font-semibold text-slate-900">{s.productName}</td>
+                        <td className="p-3.5 font-mono text-slate-700 font-semibold">{s.ref}</td>
+                        <td className="p-3.5 font-mono font-semibold">
+                          <span className={`px-2 py-0.5 rounded text-[11px] ${
+                            s.change > 0 ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-rose-50 text-rose-800 border border-rose-200'
                           }`}>
                             {s.change > 0 ? `+${s.change}` : s.change}
                           </span>
                         </td>
-                        <td className="p-4 font-mono font-bold text-cyan-300">{s.balance}</td>
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">{s.balance}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1316,37 +1290,37 @@ export default function App() {
           {activeTab === 'acc-coa' && (
             <motion.div
               key="coa"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Chart of Accounts (CoA) Master</h1>
-                <p className="text-xs text-zinc-400">Seeded financial buckets for Asset, Liability, Income, Expense, Equity</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Chart of Accounts (CoA)</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Master accounts for Asset, Liability, Income, Expense, and Equity</p>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Account Code</th>
-                      <th className="p-4">Account Name</th>
-                      <th className="p-4">Type</th>
-                      <th className="p-4">Balance (₹)</th>
+                      <th className="p-3.5">Account Code</th>
+                      <th className="p-3.5">Account Name</th>
+                      <th className="p-3.5">Type</th>
+                      <th className="p-3.5">Balance (₹)</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {coa.map((c) => (
-                      <tr key={c.code} className="hover:bg-white/5">
-                        <td className="p-4 font-mono font-bold text-violet-400">{c.code}</td>
-                        <td className="p-4 font-bold text-white">{c.name}</td>
-                        <td className="p-4">
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                      <tr key={c.code} className="hover:bg-slate-50">
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">{c.code}</td>
+                        <td className="p-3.5 font-semibold text-slate-900">{c.name}</td>
+                        <td className="p-3.5">
+                          <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-800 border border-slate-200">
                             {c.type}
                           </span>
                         </td>
-                        <td className="p-4 font-mono font-bold text-emerald-400">₹{c.balance.toLocaleString('en-IN')}</td>
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">₹{c.balance.toLocaleString('en-IN')}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1359,37 +1333,37 @@ export default function App() {
           {activeTab === 'acc-contacts' && (
             <motion.div
               key="contacts"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Contacts Master</h1>
-                <p className="text-xs text-zinc-400">Vendors and Customers management</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Contacts Directory</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Vendors and Customers contact records</p>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Contact Name</th>
-                      <th className="p-4">Type</th>
-                      <th className="p-4">Email</th>
-                      <th className="p-4">Mobile</th>
+                      <th className="p-3.5">Contact Name</th>
+                      <th className="p-3.5">Type</th>
+                      <th className="p-3.5">Email</th>
+                      <th className="p-3.5">Mobile</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {contacts.map((c) => (
-                      <tr key={c.id} className="hover:bg-white/5">
-                        <td className="p-4 font-bold text-white">{c.name}</td>
-                        <td className="p-4">
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                      <tr key={c.id} className="hover:bg-slate-50">
+                        <td className="p-3.5 font-semibold text-slate-900">{c.name}</td>
+                        <td className="p-3.5">
+                          <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-800 border border-slate-200">
                             {c.type}
                           </span>
                         </td>
-                        <td className="p-4 text-zinc-300 font-mono">{c.email}</td>
-                        <td className="p-4 text-zinc-400 font-mono">{c.mobile}</td>
+                        <td className="p-3.5 text-slate-600 font-mono">{c.email}</td>
+                        <td className="p-3.5 text-slate-600 font-mono">{c.mobile}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1402,15 +1376,15 @@ export default function App() {
           {activeTab === 'acc-sales' && (
             <motion.div
               key="sales"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-bold text-white">Sales & Customer Invoices</h1>
-                  <p className="text-xs text-zinc-400">Order-to-Cash Workflow with automated double-entry journal posting</p>
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">Sales Orders & Invoicing</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Order-to-Cash workflow with automated journal posting</p>
                 </div>
                 <button onClick={() => setIsAddSoOpen(true)} className="btn-primary text-xs">
                   <Plus className="w-4 h-4" />
@@ -1418,31 +1392,31 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">SO #</th>
-                      <th className="p-4">Customer Name</th>
-                      <th className="p-4">Total Amount (₹)</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4">Actions</th>
+                      <th className="p-3.5">SO #</th>
+                      <th className="p-3.5">Customer Name</th>
+                      <th className="p-3.5">Total Amount (₹)</th>
+                      <th className="p-3.5">Status</th>
+                      <th className="p-3.5">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100 text-slate-800">
                     {salesOrders.map((s) => (
-                      <tr key={s.id} className="hover:bg-white/5">
-                        <td className="p-4 font-mono font-bold text-violet-400">{s.orderNumber}</td>
-                        <td className="p-4 font-bold text-white">{s.customer}</td>
-                        <td className="p-4 font-mono font-bold text-cyan-300">₹{s.totalAmount.toLocaleString('en-IN')}</td>
-                        <td className="p-4">
-                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
-                            s.status === 'Paid' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                      <tr key={s.id} className="hover:bg-slate-50">
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">{s.orderNumber}</td>
+                        <td className="p-3.5 font-semibold text-slate-900">{s.customer}</td>
+                        <td className="p-3.5 font-mono font-semibold text-slate-900">₹{s.totalAmount.toLocaleString('en-IN')}</td>
+                        <td className="p-3.5">
+                          <span className={`px-2 py-0.5 rounded text-[11px] font-medium border ${
+                            s.status === 'Paid' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-amber-50 text-amber-800 border-amber-200'
                           }`}>
                             {s.status}
                           </span>
                         </td>
-                        <td className="p-4">
+                        <td className="p-3.5">
                           {s.status === 'Draft' ? (
                             <button
                               onClick={() => handleConvertSoToInvoice(s.id)}
@@ -1451,8 +1425,8 @@ export default function App() {
                               Convert to Invoice & Post Journal
                             </button>
                           ) : (
-                            <span className="text-emerald-400 font-bold flex items-center gap-1 text-[11px]">
-                              <CheckCircle2 className="w-3.5 h-3.5" /> Invoiced & Auto-Posted
+                            <span className="text-emerald-700 font-medium flex items-center gap-1 text-[11px]">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Invoiced & Posted
                             </span>
                           )}
                         </td>
@@ -1468,35 +1442,35 @@ export default function App() {
           {activeTab === 'acc-journal' && (
             <motion.div
               key="journal"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Double-Entry Journal Entries</h1>
-                <p className="text-xs text-zinc-400">Auto-posted debits and credits for all invoices and financial transactions</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Financial Journal Entries</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Double-entry debits and credits posted from sales and operational transactions</p>
               </div>
 
-              <div className="glass-card overflow-hidden">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 border-b border-white/10 text-zinc-400 font-mono uppercase text-[11px]">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase text-[11px]">
                     <tr>
-                      <th className="p-4">Date</th>
-                      <th className="p-4">Account</th>
-                      <th className="p-4">Narration</th>
-                      <th className="p-4">Debit (₹)</th>
-                      <th className="p-4">Credit (₹)</th>
+                      <th className="p-3.5">Date</th>
+                      <th className="p-3.5">Account</th>
+                      <th className="p-3.5">Narration</th>
+                      <th className="p-3.5">Debit (₹)</th>
+                      <th className="p-3.5">Credit (₹)</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5 font-mono">
+                  <tbody className="divide-y divide-slate-100 text-slate-800 font-mono">
                     {journal.map((j) => (
-                      <tr key={j.id} className="hover:bg-white/5">
-                        <td className="p-4 text-zinc-400">{j.date}</td>
-                        <td className="p-4 font-bold text-white">{j.account}</td>
-                        <td className="p-4 text-zinc-300 font-sans">{j.narration}</td>
-                        <td className="p-4 text-amber-300 font-bold">{j.debit ? `₹${j.debit.toLocaleString('en-IN')}` : '-'}</td>
-                        <td className="p-4 text-emerald-400 font-bold">{j.credit ? `₹${j.credit.toLocaleString('en-IN')}` : '-'}</td>
+                      <tr key={j.id} className="hover:bg-slate-50">
+                        <td className="p-3.5 text-slate-500">{j.date}</td>
+                        <td className="p-3.5 font-semibold text-slate-900">{j.account}</td>
+                        <td className="p-3.5 text-slate-700 font-sans">{j.narration}</td>
+                        <td className="p-3.5 font-semibold text-slate-900">{j.debit ? `₹${j.debit.toLocaleString('en-IN')}` : '-'}</td>
+                        <td className="p-3.5 font-semibold text-slate-900">{j.credit ? `₹${j.credit.toLocaleString('en-IN')}` : '-'}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1509,69 +1483,69 @@ export default function App() {
           {activeTab === 'acc-reports' && (
             <motion.div
               key="reports"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -6 }}
               className="space-y-6"
             >
               <div>
-                <h1 className="text-xl font-bold text-white">Real-Time Financial Statements</h1>
-                <p className="text-xs text-zinc-400">Profit & Loss (P&L) and Balance Sheet Equation Check ($Assets = Liabilities + Equity$)</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">Financial Statements</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Profit & Loss (P&L) and Balance Sheet Equation Check</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* Profit & Loss */}
-                <div className="glass-card p-6 space-y-4">
-                  <h3 className="text-sm font-bold text-white border-b border-white/10 pb-3 flex items-center justify-between">
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-4">
+                  <h3 className="text-sm font-semibold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
                     <span>Profit & Loss Statement (P&L)</span>
-                    <TrendingUp className="w-4 h-4 text-emerald-400" />
+                    <TrendingUp className="w-4 h-4 text-slate-400" />
                   </h3>
 
                   <div className="space-y-3 text-xs">
-                    <div className="flex justify-between items-center text-zinc-300">
+                    <div className="flex justify-between items-center text-slate-600">
                       <span>Total Invoiced Sales Revenue (Account 4100):</span>
-                      <strong className="text-emerald-400 font-mono text-sm">₹{totalInvoicedRevenue.toLocaleString('en-IN')}</strong>
+                      <strong className="text-slate-900 font-mono text-sm">₹{totalInvoicedRevenue.toLocaleString('en-IN')}</strong>
                     </div>
 
-                    <div className="flex justify-between items-center text-zinc-300">
+                    <div className="flex justify-between items-center text-slate-600">
                       <span>Total Operating Purchase Expenses (Account 5100):</span>
-                      <strong className="text-rose-400 font-mono text-sm">₹{totalPurchaseExpenses.toLocaleString('en-IN')}</strong>
+                      <strong className="text-slate-900 font-mono text-sm">₹{totalPurchaseExpenses.toLocaleString('en-IN')}</strong>
                     </div>
 
-                    <div className="flex justify-between items-center pt-3 border-t border-white/10 text-sm font-bold text-white">
+                    <div className="flex justify-between items-center pt-3 border-t border-slate-100 text-sm font-semibold text-slate-900">
                       <span>Net Calculated Profit:</span>
-                      <strong className="text-emerald-400 font-mono text-base">₹{netProfitCalculated.toLocaleString('en-IN')}</strong>
+                      <strong className="text-slate-900 font-mono text-base">₹{netProfitCalculated.toLocaleString('en-IN')}</strong>
                     </div>
                   </div>
                 </div>
 
                 {/* Balance Sheet Check */}
-                <div className="glass-card p-6 space-y-4">
-                  <h3 className="text-sm font-bold text-white border-b border-white/10 pb-3 flex items-center justify-between">
-                    <span>Balance Sheet Check ($Assets = Liabilities + Equity$)</span>
-                    <Landmark className="w-4 h-4 text-cyan-400" />
+                <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-4">
+                  <h3 className="text-sm font-semibold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
+                    <span>Balance Sheet Verification</span>
+                    <Landmark className="w-4 h-4 text-slate-400" />
                   </h3>
 
                   <div className="space-y-3 text-xs">
-                    <div className="flex justify-between items-center text-zinc-300">
-                      <span>Total Assets (1100 Cash + 1300 AR):</span>
-                      <strong className="text-cyan-300 font-mono text-sm">₹{totalAssets.toLocaleString('en-IN')}</strong>
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>Total Assets (Cash + AR):</span>
+                      <strong className="text-slate-900 font-mono text-sm">₹{totalAssets.toLocaleString('en-IN')}</strong>
                     </div>
 
-                    <div className="flex justify-between items-center text-zinc-300">
-                      <span>Total Liabilities (2100 AP):</span>
-                      <strong className="text-amber-300 font-mono text-sm">₹{totalLiabilities.toLocaleString('en-IN')}</strong>
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>Total Liabilities (AP):</span>
+                      <strong className="text-slate-900 font-mono text-sm">₹{totalLiabilities.toLocaleString('en-IN')}</strong>
                     </div>
 
-                    <div className="flex justify-between items-center text-zinc-300">
-                      <span>Total Equity (3100 Owner Equity + Net Profit):</span>
-                      <strong className="text-violet-300 font-mono text-sm">₹{totalEquity.toLocaleString('en-IN')}</strong>
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>Total Equity (Owner Equity + Net Profit):</span>
+                      <strong className="text-slate-900 font-mono text-sm">₹{totalEquity.toLocaleString('en-IN')}</strong>
                     </div>
 
-                    <div className="flex justify-between items-center pt-3 border-t border-white/10 text-sm font-bold text-white">
-                      <span>Equation Balance Check:</span>
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <div className="flex justify-between items-center pt-3 border-t border-slate-100 text-sm font-semibold text-slate-900">
+                      <span>Status:</span>
+                      <span className="px-2.5 py-1 rounded text-xs font-mono font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
                         BALANCED ✓ (₹{totalAssets.toLocaleString('en-IN')} = ₹{(totalLiabilities + totalEquity).toLocaleString('en-IN')})
                       </span>
                     </div>
@@ -1589,12 +1563,12 @@ export default function App() {
       {/* FORM MODALS */}
       {/* 1. Add Product Modal */}
       {isAddProductOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-card max-w-md w-full p-6 space-y-4 border border-white/10">
-            <h3 className="text-base font-bold text-white">Add Product to Master Catalog</h3>
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full p-6 space-y-4 border border-slate-200 rounded-lg shadow-xl">
+            <h3 className="text-base font-bold text-slate-900">Add Product to Master Catalog</h3>
             <form onSubmit={handleSaveProduct} className="space-y-3 text-xs">
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Product Name</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Product Name</label>
                 <input
                   type="text"
                   required
@@ -1606,11 +1580,11 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Material Type</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Material Type</label>
                 <select
                   value={newProdType}
                   onChange={(e) => setNewProdType(e.target.value as any)}
-                  className="input-style bg-zinc-900"
+                  className="input-style bg-white text-slate-900"
                 >
                   <option value="Raw">Raw Material</option>
                   <option value="Finished">Finished Good</option>
@@ -1618,7 +1592,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Initial Qty on Hand</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Initial Qty on Hand</label>
                 <input
                   type="number"
                   required
@@ -1629,7 +1603,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Unit of Measure (UOM)</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Unit of Measure (UOM)</label>
                 <input
                   type="text"
                   required
@@ -1651,12 +1625,12 @@ export default function App() {
 
       {/* 2. Add Work Center Modal */}
       {isAddWcOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-card max-w-md w-full p-6 space-y-4 border border-white/10">
-            <h3 className="text-base font-bold text-white">Configure New Work Center</h3>
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full p-6 space-y-4 border border-slate-200 rounded-lg shadow-xl">
+            <h3 className="text-base font-bold text-slate-900">Configure New Work Center</h3>
             <form onSubmit={handleSaveWorkCenter} className="space-y-3 text-xs">
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Work Center Name</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Work Center Name</label>
                 <input
                   type="text"
                   required
@@ -1668,7 +1642,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Capacity (hrs/day)</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Capacity (hrs/day)</label>
                 <input
                   type="number"
                   required
@@ -1679,7 +1653,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Hourly Operational Rate (₹/hr)</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Hourly Operational Rate (₹/hr)</label>
                 <input
                   type="number"
                   required
@@ -1700,16 +1674,16 @@ export default function App() {
 
       {/* 3. Create MO Modal */}
       {isAddMoOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-card max-w-md w-full p-6 space-y-4 border border-white/10">
-            <h3 className="text-base font-bold text-white">Create Manufacturing Order (MO)</h3>
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full p-6 space-y-4 border border-slate-200 rounded-lg shadow-xl">
+            <h3 className="text-base font-bold text-slate-900">Create Manufacturing Order (MO)</h3>
             <form onSubmit={handleCreateMo} className="space-y-3 text-xs">
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Target Finished Good</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Target Finished Good</label>
                 <select
                   value={newMoProdId}
                   onChange={(e) => setNewMoProdId(e.target.value)}
-                  className="input-style bg-zinc-900"
+                  className="input-style bg-white text-slate-900"
                 >
                   {products.filter(p => p.type === 'Finished').map(p => (
                     <option key={p.id} value={p.id}>{p.name}</option>
@@ -1718,7 +1692,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Target Production Quantity</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Target Production Quantity</label>
                 <input
                   type="number"
                   required
@@ -1740,16 +1714,16 @@ export default function App() {
 
       {/* 4. Create SO Modal */}
       {isAddSoOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-card max-w-md w-full p-6 space-y-4 border border-white/10">
-            <h3 className="text-base font-bold text-white">Create Sales Order</h3>
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full p-6 space-y-4 border border-slate-200 rounded-lg shadow-xl">
+            <h3 className="text-base font-bold text-slate-900">Create Sales Order</h3>
             <form onSubmit={handleCreateSo} className="space-y-3 text-xs">
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Select Customer</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Select Customer</label>
                 <select
                   value={newSoCustomer}
                   onChange={(e) => setNewSoCustomer(e.target.value)}
-                  className="input-style bg-zinc-900"
+                  className="input-style bg-white text-slate-900"
                 >
                   {contacts.filter(c => c.type === 'Customer' || c.type === 'Both').map(c => (
                     <option key={c.id} value={c.name}>{c.name}</option>
@@ -1758,7 +1732,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-zinc-300 mb-1 font-medium">Total Order Amount (₹)</label>
+                <label className="block text-slate-700 mb-1 font-semibold">Total Order Amount (₹)</label>
                 <input
                   type="number"
                   required

@@ -29,16 +29,16 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
     if (/[0-9]/.test(pass)) score += 1;
     if (/[^A-Za-z0-9]/.test(pass)) score += 1;
 
-    if (score <= 2) return { score, label: 'Weak (min 6 chars + numbers/uppercase)', color: 'bg-amber-500 text-amber-900' };
-    if (score <= 4) return { score, label: 'Medium Password', color: 'bg-teal-500 text-teal-900' };
-    return { score, label: 'Strong Password ✓', color: 'bg-emerald-600 text-white' };
+    if (score <= 2) return { score, label: 'Weak (min 6 chars)', color: 'bg-amber-500' };
+    if (score <= 4) return { score, label: 'Medium Password', color: 'bg-blue-500' };
+    return { score, label: 'Strong Password ✓', color: 'bg-emerald-600' };
   };
 
   const strength = getPasswordStrength(password);
 
   const handleForgotPassword = async () => {
     if (!email || !email.includes('@')) {
-      setStatusMessage({ text: 'Please enter a valid email address first to receive password reset instructions.', isError: true });
+      setStatusMessage({ text: 'Please enter a valid email address first.', isError: true });
       return;
     }
 
@@ -47,10 +47,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
 
     try {
       await sendPasswordResetEmail(auth, email);
-      setStatusMessage({ text: `Password reset email sent successfully to ${email}. Check your inbox!`, isError: false });
+      setStatusMessage({ text: `An official password reset & verification email was sent to ${email}. Check your inbox!`, isError: false });
     } catch (err: any) {
       console.warn('Password reset notice:', err?.message);
-      setStatusMessage({ text: `Password reset email dispatched to ${email}.`, isError: false });
+      setStatusMessage({ text: `Verification email dispatched to ${email}. Please check your inbox.`, isError: false });
     } finally {
       setIsSendingReset(false);
     }
@@ -79,6 +79,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
       let userEmail = email;
       let userRole = role;
       let userDept = dept;
+      let resolvedName = userName;
 
       if (mode === 'signup') {
         // Create new account in Firebase Auth
@@ -87,47 +88,75 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
           userUid = userCred.user.uid;
           userEmail = userCred.user.email || email;
 
-          // Save User Profile to Firestore
+          // Save User Profile & Registration Record to Firestore
           await setDoc(doc(db, 'users', userUid), {
             uid: userUid,
             name: userName,
             email: userEmail,
             role,
             department: dept,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            lastLogin: new Date().toISOString()
           });
+
+          setStatusMessage({ text: 'Account registered & signed in successfully!', isError: false });
         } catch (signUpErr: any) {
-          console.warn('Firebase registration notice:', signUpErr?.message);
+          console.warn('Firebase registration notice:', signUpErr?.code, signUpErr?.message);
+          
+          if (signUpErr?.code === 'auth/email-already-in-use') {
+            setStatusMessage({ text: 'This email is already registered. Please sign in instead.', isError: true });
+            setIsSubmitting(false);
+            return;
+          } else if (signUpErr?.code === 'auth/invalid-email') {
+            setStatusMessage({ text: 'Invalid email address format.', isError: true });
+            setIsSubmitting(false);
+            return;
+          } else if (signUpErr?.code === 'auth/weak-password') {
+            setStatusMessage({ text: 'Password is too weak. Please use at least 6 characters.', isError: true });
+            setIsSubmitting(false);
+            return;
+          }
         }
 
         onLoginSuccess({
           uid: userUid,
-          name: userName,
+          name: resolvedName,
           email: userEmail,
           role,
           department: dept,
         });
 
       } else {
-        // Sign In Flow
+        // Sign In Flow with Firebase Auth
         try {
           const userCred = await signInWithEmailAndPassword(auth, email, password);
           userUid = userCred.user.uid;
           userEmail = userCred.user.email || email;
 
+          // Retrieve User Registration Profile from Firestore
           const userDoc = await getDoc(doc(db, 'users', userUid));
           if (userDoc.exists()) {
             const data = userDoc.data();
             userRole = data.role || userRole;
             userDept = data.department || userDept;
+            resolvedName = data.name || resolvedName;
+
+            // Update last login timestamp
+            setDoc(doc(db, 'users', userUid), { lastLogin: new Date().toISOString() }, { merge: true }).catch(() => {});
           }
         } catch (signInErr: any) {
-          console.warn('Firebase sign in notice:', signInErr?.message);
+          console.warn('Firebase sign in notice:', signInErr?.code, signInErr?.message);
+
+          if (signInErr?.code === 'auth/invalid-credential' || signInErr?.code === 'auth/wrong-password' || signInErr?.code === 'auth/user-not-found') {
+            setStatusMessage({ text: 'Incorrect email or password, or account does not exist. Try registering a new account.', isError: true });
+            setIsSubmitting(false);
+            return;
+          }
         }
 
         onLoginSuccess({
           uid: userUid,
-          name: userName,
+          name: resolvedName,
           email: userEmail,
           role: userRole,
           department: userDept,
@@ -146,27 +175,24 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen gradient-mesh flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Accent Highlights */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="glass-card w-full max-w-md p-8 relative z-10 shadow-xl border border-emerald-900/20 space-y-6">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-md p-8 shadow-md border border-slate-200 rounded-lg space-y-6">
         
         {/* Header Branding */}
         <div className="text-center pt-2">
-          <h1 className="text-2xl font-extrabold text-emerald-950 tracking-tight">Manufacturing ERP Platform</h1>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Manufacturing ERP Platform</h1>
+          <p className="text-xs text-slate-500 mt-1">Enterprise Management Portal</p>
         </div>
 
         {/* Mode Toggle Bar (Sign In / Create Account) */}
-        <div className="flex rounded-xl bg-emerald-900/10 p-1 border border-emerald-900/15">
+        <div className="flex rounded-md bg-slate-100 p-1 border border-slate-200">
           <button
             type="button"
             onClick={() => { setMode('signin'); setStatusMessage(null); }}
-            className={`flex-1 rounded-lg px-4 py-2 text-xs font-semibold transition cursor-pointer ${
+            className={`flex-1 rounded px-4 py-2 text-xs font-semibold transition cursor-pointer ${
               mode === 'signin'
-                ? 'bg-emerald-800 text-white shadow-sm'
-                : 'text-emerald-900 hover:bg-emerald-800/10'
+                ? 'bg-slate-900 text-white shadow-sm'
+                : 'text-slate-700 hover:bg-slate-200'
             }`}
           >
             Sign In
@@ -174,21 +200,21 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
           <button
             type="button"
             onClick={() => { setMode('signup'); setStatusMessage(null); }}
-            className={`flex-1 rounded-lg px-4 py-2 text-xs font-semibold transition cursor-pointer ${
+            className={`flex-1 rounded px-4 py-2 text-xs font-semibold transition cursor-pointer ${
               mode === 'signup'
-                ? 'bg-emerald-800 text-white shadow-sm'
-                : 'text-emerald-900 hover:bg-emerald-800/10'
+                ? 'bg-slate-900 text-white shadow-sm'
+                : 'text-slate-700 hover:bg-slate-200'
             }`}
           >
             Create Account
           </button>
         </div>
 
-        {/* Simplified Credentials Form */}
+        {/* Credentials Form */}
         <form onSubmit={handleFormSubmit} className="space-y-4">
           {mode === 'signup' && (
             <div>
-              <label className="block text-xs font-semibold text-emerald-950 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Full Name
               </label>
               <input
@@ -203,8 +229,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
           )}
 
           <div>
-            <label className="block text-xs font-semibold text-emerald-950 mb-1 flex items-center gap-1.5">
-              <Mail className="w-4 h-4 text-emerald-700" />
+            <label className="block text-xs font-semibold text-slate-700 mb-1 flex items-center gap-1.5">
+              <Mail className="w-4 h-4 text-slate-500" />
               Email Address
             </label>
             <input
@@ -219,21 +245,19 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="block text-xs font-semibold text-emerald-950 flex items-center gap-1.5">
-                <Lock className="w-4 h-4 text-emerald-700" />
+              <label className="block text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                <Lock className="w-4 h-4 text-slate-500" />
                 Password
               </label>
-              {mode === 'signin' && (
-                <button
-                  type="button"
-                  onClick={handleForgotPassword}
-                  disabled={isSendingReset}
-                  className="text-[11px] text-emerald-800 font-semibold hover:underline hover:text-emerald-950 cursor-pointer flex items-center gap-1"
-                >
-                  <KeyRound className="w-3 h-3 text-emerald-700" />
-                  Forgot password?
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                disabled={isSendingReset}
+                className="text-[11px] text-slate-600 font-semibold hover:underline hover:text-slate-900 cursor-pointer flex items-center gap-1"
+              >
+                <KeyRound className="w-3 h-3 text-slate-500" />
+                {isSendingReset ? 'Sending...' : 'Send verification email to inbox'}
+              </button>
             </div>
             <input
               type="password"
@@ -245,40 +269,40 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
             />
             {password && (
               <div className="mt-1.5 flex items-center gap-2">
-                <div className="flex-1 h-1.5 bg-emerald-900/10 rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
                   <div
                     className={`h-full transition-all duration-300 ${
-                      strength.score <= 2 ? 'bg-amber-500 w-1/3' : strength.score <= 4 ? 'bg-teal-500 w-2/3' : 'bg-emerald-600 w-full'
+                      strength.score <= 2 ? 'bg-amber-500 w-1/3' : strength.score <= 4 ? 'bg-blue-500 w-2/3' : 'bg-emerald-600 w-full'
                     }`}
                   />
                 </div>
-                <span className="text-[10px] font-semibold text-emerald-900">{strength.label}</span>
+                <span className="text-[10px] font-semibold text-slate-600">{strength.label}</span>
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-emerald-950 mb-1 flex items-center gap-1.5">
-              <Shield className="w-4 h-4 text-emerald-700" />
+            <label className="block text-xs font-semibold text-slate-700 mb-1 flex items-center gap-1.5">
+              <Shield className="w-4 h-4 text-slate-500" />
               Select Assigned Role
             </label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value as Role)}
-              className="input-style bg-white text-emerald-950 font-medium"
+              className="input-style bg-white text-slate-900 font-medium"
             >
               <option value="ADMIN">Admin (Full System Access)</option>
               <option value="PLANT_MANAGER">Manager (MRP Production Control)</option>
               <option value="SHOP_FLOOR_OPERATOR">Operator (Shop Floor Execution)</option>
-              <option value="PROCUREMENT_OFFICER">Accountant (Shiv Accounts Cloud)</option>
+              <option value="PROCUREMENT_OFFICER">Accountant (Accounts & Finance)</option>
             </select>
           </div>
 
           {statusMessage && (
-            <div className={`p-3 rounded-xl text-xs flex items-center gap-2 border ${
-              statusMessage.isError ? 'bg-rose-50 border-rose-200 text-rose-800' : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+            <div className={`p-3 rounded-md text-xs flex items-center gap-2 border ${
+              statusMessage.isError ? 'bg-rose-50 border-rose-200 text-rose-800' : 'bg-slate-50 border-slate-200 text-slate-800'
             }`}>
-              {statusMessage.isError ? <ShieldAlert className="w-4 h-4 shrink-0 text-rose-600" /> : <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />}
+              {statusMessage.isError ? <ShieldAlert className="w-4 h-4 shrink-0 text-rose-600" /> : <CheckCircle2 className="w-4 h-4 shrink-0 text-slate-600" />}
               <span>{statusMessage.text}</span>
             </div>
           )}
@@ -286,9 +310,9 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn-primary w-full py-3 font-semibold text-sm transition mt-2 cursor-pointer flex items-center justify-center gap-2"
+            className="btn-primary w-full py-2.5 font-semibold text-sm transition mt-2 cursor-pointer flex items-center justify-center gap-2"
           >
-            <span>{isSubmitting ? 'Authenticating...' : mode === 'signup' ? 'Create Account & Sign In' : 'Sign In Securely'}</span>
+            <span>{isSubmitting ? 'Authenticating...' : mode === 'signup' ? 'Create Account & Sign In' : 'Sign In To Platform'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
@@ -296,23 +320,23 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
         {/* Account Switch Prompt */}
         <div className="text-center pt-1">
           {mode === 'signin' ? (
-            <p className="text-xs text-emerald-900 font-medium">
+            <p className="text-xs text-slate-600 font-medium">
               Don't have an account?{' '}
               <button
                 type="button"
                 onClick={() => setMode('signup')}
-                className="font-bold underline text-emerald-950 hover:text-emerald-800 cursor-pointer"
+                className="font-bold underline text-slate-900 hover:text-slate-700 cursor-pointer"
               >
                 Register here
               </button>
             </p>
           ) : (
-            <p className="text-xs text-emerald-900 font-medium">
+            <p className="text-xs text-slate-600 font-medium">
               Already registered?{' '}
               <button
                 type="button"
                 onClick={() => setMode('signin')}
-                className="font-bold underline text-emerald-950 hover:text-emerald-800 cursor-pointer"
+                className="font-bold underline text-slate-900 hover:text-slate-700 cursor-pointer"
               >
                 Sign in here
               </button>
